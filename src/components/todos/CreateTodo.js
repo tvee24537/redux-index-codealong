@@ -13,7 +13,11 @@ class CreateTodo extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.addTodo(this.state)
+    this.setState({
+      text: '',
+    })
   }
+  
 
   handleChange(event) {
     this.setState({
@@ -34,8 +38,10 @@ class CreateTodo extends Component {
   }
 };
 
-const mapDispatchToProps = dispatch => ({
-  addTodo: formData => dispatch({ type: 'ADD_TODO', payload: formData })
-})
+const mapStateToProps = state => {
+  return {
+    todos: state.todos
+  }
+}
 
-export default connect(null, mapDispatchToProps)(CreateTodo);
+export default connect(mapStateToProps)(TodosContainer); 
